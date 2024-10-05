@@ -1,11 +1,11 @@
 <script setup>
-
+import MainLayout from "../Layout/MainLayout.vue";
 </script>
 
 <template>
-    <div>
-        <p class="text-blue-500">This test pages</p>
-    </div>
+    <MainLayout>
+        <p class="">This test pages</p>
+    </MainLayout>
 </template>
 
 <style></style>

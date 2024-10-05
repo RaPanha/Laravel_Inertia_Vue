@@ -1,21 +1,29 @@
-import './bootstrap';
+import "./bootstrap";
+import "../css/app.css";
 
-import { createApp, h } from 'vue'
-import { createInertiaApp } from '@inertiajs/vue3'
+import { createApp, h } from "vue";
+import { createInertiaApp } from "@inertiajs/vue3";
+import { ZiggyVue } from "../../vendor/tightenco/ziggy";
+import { setThemeOnLoad } from "./theme";
 
 createInertiaApp({
- resolve: (name) => {
+    resolve: (name) => {
         return _resolvePageComponent(
             name,
             import.meta.glob("./Pages/**/*.vue")
         );
     },
-  setup({ el, App, props, plugin }) {
-    createApp({ render: () => h(App, props) })
-      .use(plugin)
-      .mount(el)
-  },
-})
+    setup({ el, App, props, plugin }) {
+        createApp({ render: () => h(App, props) })
+            .use(plugin)
+            .use(ZiggyVue)
+            .mount(el);
+    },
+    progress: {
+        color: "#0077b6",
+        showSpinner: true,
+    },
+});
 
 function _resolvePageComponent(name, pages) {
     for (const path in pages) {
@@ -28,3 +36,5 @@ function _resolvePageComponent(name, pages) {
 
     throw new Error(`Page not found: ${name}`);
 }
+
+setThemeOnLoad();
